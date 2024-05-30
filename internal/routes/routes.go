@@ -7,11 +7,14 @@ func NewRouter() *fiber.App {
 	app := fiber.New()
 
 	// Setup Routes
-	app.Get("/book", getBook)
-	app.Get("/books", getAllBooks)
-	app.Post("/book", createBook)
-	app.Put("/book", updateBook)
-	app.Delete("/book", deleteBook)
+	app.Get("/health", func(c *fiber.Ctx) error {
+		return c.SendString("OK")
+	})
+	app.Get("/book", getBookHandler)
+	app.Get("/books", getBooksHandler)
+	app.Post("/book", createBookHandler)
+	app.Put("/book", updateBookHandler)
+	app.Delete("/book", deleteBookHandler)
 
 	return app
 }

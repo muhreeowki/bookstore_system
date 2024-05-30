@@ -2,20 +2,12 @@ package main
 
 import (
 	"fmt"
-	"log"
 
-	"github.com/muhreeowki/bookstore_system/internal/config"
+	"github.com/muhreeowki/bookstore_system/internal/database"
 	"github.com/muhreeowki/bookstore_system/internal/routes"
 )
 
 func main() {
-	// Connect to the database
-	db, err := config.StartDB()
-	if err != nil {
-		panic(err)
-	}
-	log.Println("DB connection successful", db)
-
 	// Setup the Router
 	app := routes.NewRouter()
 
@@ -23,6 +15,16 @@ func main() {
 	port := 8000
 	addr := fmt.Sprintf(":%d", port)
 
+	// Start db connection
+	err := database.StartDB()
+	if err != nil {
+		panic(err)
+	}
+
+	// Start the server
 	fmt.Printf("Server is running on port %d\n", port)
-	app.Listen(addr)
+	err = app.Listen(addr)
+	if err != nil {
+		panic(err)
+	}
 }
