@@ -10,11 +10,10 @@ func NewRouter() *fiber.App {
 	app.Get("/health", func(c *fiber.Ctx) error {
 		return c.SendString("OK")
 	})
-	app.Get("/book", getBookHandler)
-	app.Get("/books", getBooksHandler)
 	app.Post("/book", createBookHandler)
-	app.Put("/book", updateBookHandler)
-	app.Delete("/book", deleteBookHandler)
+	app.Get("/book/:bookID", getBookHandler)
+	app.Delete("/book/:bookID", deleteBookHandler)
+	app.Get("/books", getBooksHandler)
 
 	return app
 }
