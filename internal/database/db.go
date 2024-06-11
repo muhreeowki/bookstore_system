@@ -24,7 +24,7 @@ func StartDB() error {
 	// Migrate the schema
 	DB.AutoMigrate(&Book{})
 
-	// Add Books
+	// Add Books Fake Books
 
 	log.Println("DB connection successful", db)
 	return nil
